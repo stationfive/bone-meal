@@ -1,3 +1,13 @@
+## Todo
+ - add in thunks ExamplePage
+ - build in asyncThunkFetch
+ - example of lifecycle hook for onpage-load
+ - example of redux-listener (for commonly triggered)
+ - strip out AsyncActions if required
+ - add lastUpdated in AsyncMeta
+ - redux hooks
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
