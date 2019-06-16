@@ -5,6 +5,7 @@ import { mapObj } from 'utils/DataUtils';
 
 const componentsFolders = {
   [ROUTES.ROOT]: 'Home',
+  [ROUTES.EXAMPLE]: 'Example',
   [ROUTES.NOT_FOUND]: 'NotFound',
 };
 

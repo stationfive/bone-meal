@@ -1,8 +1,9 @@
 import { User } from "types/User";
 
 export type ExamplePageGeneratedProps = {
-  user: boolean,
-  setUser: (newUser: boolean) => void,
+  toggle: boolean,
+  setToggle: (newUser: boolean) => void,
+  uid: string,
 }
 
 export type ExamplePagePassedProps = {

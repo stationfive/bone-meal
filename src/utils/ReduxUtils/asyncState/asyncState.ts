@@ -1,30 +1,53 @@
-import {AsyncMeta} from "types/Store/AsyncMeta";
-import {LOADING_STATES} from "src/types/Store/LoadingStates";
+import {AsyncMeta, AsyncMetaOptional} from "types/Store/AsyncMeta";
+import {LOADING_STATES} from "types/Store/LoadingStates";
 
-function asyncState<T>(state: LOADING_STATES.LOADING, data?: null): AsyncMeta<T>;
-function asyncState<T>(state: LOADING_STATES.COMPLETE, data: T): AsyncMeta<T>;
-function asyncState<T>(state: LOADING_STATES.INITIAL, data: T | null): AsyncMeta<T>;
-function asyncState<T>(state: LOADING_STATES.ERROR, errors: any[]): AsyncMeta<T>;
-function asyncState<T>(state: LOADING_STATES.LOADING | LOADING_STATES.COMPLETE | LOADING_STATES.INITIAL | LOADING_STATES.ERROR, errorsOrData: any): AsyncMeta<T> {
+export function asyncState<T>(state: LOADING_STATES.LOADING, data: T, _?: T): AsyncMeta<T>;
+export function asyncState<T>(state: LOADING_STATES.COMPLETE, data: T, _?: T): AsyncMeta<T>;
+export function asyncState<T>(state: LOADING_STATES.ERROR, errors: any[], data: T): AsyncMeta<T>;
+export function asyncState<T>(state: LOADING_STATES, errorsOrData: any, data: T): AsyncMeta<T> {
   if (state & LOADING_STATES.LOADING) {
     return {
       errors: [],
       state: LOADING_STATES.LOADING,
-      data: null,
+      data: errorsOrData,
     };
   } else if (state & (LOADING_STATES.COMPLETE | LOADING_STATES.INITIAL)) {
     return {
       errors: [],
       state,
-      data: errorsOrData === undefined ? null : errorsOrData,
+      data: errorsOrData,
     }
   } else {
     return {
       errors: errorsOrData,
       state,
-      data: null,
+      data,
     }
   }
 }
 
-export default asyncState;
+export function asyncStateOptional<T>(state: LOADING_STATES.INITIAL, data?: T | undefined): AsyncMetaOptional<T>;
+export function asyncStateOptional<T>(state: LOADING_STATES.LOADING, data?: T | undefined): AsyncMetaOptional<T>;
+export function asyncStateOptional<T>(state: LOADING_STATES.COMPLETE, data: T): AsyncMetaOptional<T>;
+export function asyncStateOptional<T>(state: LOADING_STATES.ERROR, errors: any[]): AsyncMetaOptional<T>;
+export function asyncStateOptional<T>(state: LOADING_STATES, errorsOrData: any): AsyncMetaOptional<T> {
+  if (state & LOADING_STATES.LOADING) {
+    return {
+      errors: [],
+      state: LOADING_STATES.LOADING,
+      data: undefined,
+    };
+  } else if (state & (LOADING_STATES.COMPLETE | LOADING_STATES.INITIAL)) {
+    return {
+      errors: [],
+      state: state,
+      data: errorsOrData,
+    }
+  } else {
+    return {
+      errors: errorsOrData,
+      state: LOADING_STATES.ERROR,
+      data: undefined,
+    };
+  }
+}

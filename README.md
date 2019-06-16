@@ -1,11 +1,14 @@
 ## Todo
+ - useAsyncSelector (is this needed?) or use rest with useSelector
+ - Debug why reducer isn't working with redux-actions handleReducers (or do custom)
+ - obviate redux and use context
+ - expand with params like authenticate: asyncThunkFetch(fetch, { store config stuff like name })
  - add in thunks ExamplePage
- - build in asyncThunkFetch
  - example of lifecycle hook for onpage-load
  - example of redux-listener (for commonly triggered)
- - strip out AsyncActions if required
+ - strip out redundant AsyncActions if required
+ - try to reducer the 'Optional' nature of AsyncTools
  - add lastUpdated in AsyncMeta
- - redux hooks
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

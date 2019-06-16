@@ -7,6 +7,4 @@ import { HomePassedProps } from "./Home.props";
 const Home: FunctionComponent<HomePassedProps> =
   (props: HomePassedProps) => <Container {...props} View={View} />;
 
-const SimpleHome = () => <div>Hi</div>;
-
-export default SimpleHome;
+export default Home;

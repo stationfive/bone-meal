@@ -17,7 +17,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 import queryString from 'query-string';
 import { PATHS } from 'consts';
-// import reducers from './reducers';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
@@ -30,7 +31,7 @@ const persistConfig: PersistConfig = {
   key: 'root',
   storage,
   whitelist: [
-    'activeTheme',
+    'token',
   ],
 };
 
@@ -43,8 +44,9 @@ const router: {
 
 const combinedReducer: Reducer = persistCombineReducers(
   persistConfig,
+  // @ts-ignore
   {
-    //...reducers,
+    ...reducers,
     location: router.reducer,
   },
 );
@@ -52,6 +54,7 @@ const combinedReducer: Reducer = persistCombineReducers(
 const middlewareEnhancer: Function =
   applyMiddleware(
     router.middleware,
+    thunk,
   );
 
 const composedEnhancers: StoreEnhancer = (isProd ? compose : composeWithDevTools)(

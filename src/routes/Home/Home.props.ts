@@ -1,8 +1,9 @@
 import { User } from "types/User";
 
 export type HomeGeneratedProps = {
-  user: boolean,
-  setUser: (newUser: boolean) => void,
+  user?: User,
+  link: (id: string) => void,
+  login: () => void,
 }
 
 export type HomePassedProps = {

@@ -1,10 +1,36 @@
-const fallback = <O, T>(obj: O, fn: (optimisticObj: Required<O>) => T, dflt?: T): T | undefined => {
+import {Optional} from "utils/TypeUtils/Optional";
+
+const _fallback = <Obj, Value>(
+  fn: (optimisticObj: Required<Obj>) => Optional<Value>,
+  defaultVal: Value,
+  obj: Obj,
+): Value => {
   try {
-    const result: T | undefined = fn(<Required<O>>obj);
-    return result !== undefined ? result : dflt;
+    const result: Optional<Value> = fn(obj as Required<Obj>);
+    return result !== undefined ? result : defaultVal;
   } catch (e) {
-    return dflt;
+    return defaultVal;
   }
 };
+
+function fallback<Obj, Value>(
+  fn: (optimisticObj: Required<Obj>) => Optional<Value>,
+  defaultVal: Value,
+  obj1: Obj,
+): Value;
+function fallback<Obj, Value>(
+  fn: (optimisticObj: Required<Obj>) => Optional<Value>,
+  defaultVal: Value
+): ((obj2: Obj) => Value);
+function fallback<Obj, Value>(
+  fn: (optimisticObj: Required<Obj>) => Optional<Value>,
+  defaultVal: Value,
+  obj1?: Obj,
+) {
+  if (obj1 !== undefined) {
+    return _fallback<Obj, Value>(fn, defaultVal, obj1);
+  }
+  return (obj2: Obj): Value => _fallback(fn, defaultVal, obj2);
+}
 
 export default fallback;
