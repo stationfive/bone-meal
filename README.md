@@ -1,14 +1,16 @@
 ## Todo
- - useAsyncSelector (is this needed?) or use rest with useSelector
+ - examplify useAsyncSelector (is this needed?)
+ - examplify using object deconstruction with useSelector
+ - authenticatedRoute
  - Debug why reducer isn't working with redux-actions handleReducers (or do custom)
- - obviate redux and use context
  - expand with params like authenticate: asyncThunkFetch(fetch, { store config stuff like name })
  - add in thunks ExamplePage
  - example of lifecycle hook for onpage-load
  - example of redux-listener (for commonly triggered)
- - strip out redundant AsyncActions if required
- - try to reducer the 'Optional' nature of AsyncTools
- - add lastUpdated in AsyncMeta
+ - add lastUpdated in AsyncData
+ - obviate redux and use context
+ - define custom error for AsyncData['errors']
+ - ? Should store be grouped by domain rather than type 
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

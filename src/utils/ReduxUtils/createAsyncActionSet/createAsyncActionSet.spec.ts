@@ -1,11 +1,10 @@
-import R from 'ramda';
-import createAsyncActions from './createAsyncActions';
-import { presetActions } from "../";
+// import R from 'ramda';
+import { makeCreateAsyncActionSet } from './createAsyncActionSet';
 
-describe('utils/ReduxUtils/createAsyncActions', () => {
-  const createTestAsyncAction = createAsyncActions('TESTNS');
+describe('utils/ReduxUtils/createAsyncActionSet', () => {
+  const createTestAsyncAction = makeCreateAsyncActionSet('TESTNS');
 
-  const asyncActions = createTestAsyncAction<string, object>('testCamel');
+  const asyncActions = createTestAsyncAction('testCamel');
 
   test('should create correct fetch action name', () => {
     expect(asyncActions.fetch.toString()).toBe('TESTNS/TEST_CAMEL/FETCH');

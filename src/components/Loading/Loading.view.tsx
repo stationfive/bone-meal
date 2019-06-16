@@ -1,9 +1,8 @@
 import React, { ReactElement, FunctionComponent } from 'react';
-import { LoadingComponentProps } from 'react-loadable';
 
-const Loading: FunctionComponent<LoadingComponentProps> = (props: LoadingComponentProps): ReactElement<'div'> => {
+const Loading: FunctionComponent = (): ReactElement<'div'> => {
   return (
-    <div className={`loading loading--${props.isLoading ? 'active' : 'inactive'}`}>
+    <div className={'loading loading--active'}>
       <div className="loading__screen">
         <div className="loading__spinner">
           <svg className="loading__circular">

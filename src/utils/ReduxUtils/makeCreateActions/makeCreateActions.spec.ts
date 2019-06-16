@@ -1,8 +1,7 @@
-import R from 'ramda';
-import createActions from './createActions';
+import createActions from './makeCreateActions';
 import { presetActions } from "../";
 
-describe('utils/ReduxUtils/createAction', () => {
+describe('utils/ReduxUtils/makeCreateAction', () => {
   const namespace = 'NAMESPACE';
 
   const createTestAction = createActions(namespace);

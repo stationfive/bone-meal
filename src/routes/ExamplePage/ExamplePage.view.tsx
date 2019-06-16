@@ -7,7 +7,7 @@ const ExamplePageView: FunctionComponent<ExamplePageProps> = (props: ExamplePage
     <div>
       <h1>
         We made it
-        User is { props.user }
+        User is { props.uid }
       </h1>
     </div>
   );

@@ -1,10 +1,10 @@
-import createAction from './createAction';
+import { makeCreateAction } from './createAction';
 import { presetActions } from "../";
 
-describe('utils/ReduxUtils/createAction', () => {
+describe('utils/ReduxUtils/makeCreateAction', () => {
   const namespace = 'NAMESPACE';
 
-  const createTestAction = createAction(namespace);
+  const createTestAction = makeCreateAction(namespace);
 
   const fixture = {};
 

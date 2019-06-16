@@ -1,4 +1,4 @@
-export type RouterPassedProps = {
+export type RouterPublicProps = {
   components: {},
 };
 
@@ -6,4 +6,4 @@ export type RouterGeneratedProps = {
   location: any,
 }
 
-export type RouterProps = RouterPassedProps & RouterGeneratedProps;
+export type RouterProps = RouterPublicProps & RouterGeneratedProps;

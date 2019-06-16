@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import View from './ExamplePage.view';
 import Container from './ExamplePage.container';
-import { ExamplePagePassedProps } from "./ExamplePage.props";
+import { ExamplePagePublicProps } from "./ExamplePage.props";
 
 
-const ExamplePage: FunctionComponent<ExamplePagePassedProps> =
-  (props: ExamplePagePassedProps) => <Container {...props} View={View} />;
+const ExamplePage: FunctionComponent<ExamplePagePublicProps> =
+  (props: ExamplePagePublicProps) => <Container {...props} View={View} />;
 
 export default ExamplePage;

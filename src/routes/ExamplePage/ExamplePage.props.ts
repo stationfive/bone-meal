@@ -6,8 +6,8 @@ export type ExamplePageGeneratedProps = {
   uid: string,
 }
 
-export type ExamplePagePassedProps = {
+export type ExamplePagePublicProps = {
   // no props can be passed to pages
 }
 
-export type ExamplePageProps = ExamplePagePassedProps & ExamplePageGeneratedProps;
+export type ExamplePageProps = ExamplePagePublicProps & ExamplePageGeneratedProps;

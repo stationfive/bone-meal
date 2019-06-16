@@ -1,9 +1,9 @@
 import { Store } from 'types/Store/Store';
 import { connect, MapStateToPropsParam } from 'react-redux';
-import { RouterGeneratedProps, RouterPassedProps } from './Router.props';
+import { RouterGeneratedProps, RouterPublicProps } from './Router.props';
 
 // todo: replace with hooooks
-const mapStateToProps: MapStateToPropsParam<RouterGeneratedProps, RouterPassedProps, Store> =
+const mapStateToProps: MapStateToPropsParam<RouterGeneratedProps, RouterPublicProps, Store> =
   (state: Store): RouterGeneratedProps => ({
     location: state.location,
   });

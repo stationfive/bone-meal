@@ -1,7 +1,6 @@
-import { createAction as createReduxAction } from 'redux-actions';
 import { camelToSnake } from 'utils/StringUtils';
 
-const createActions = (
+const makeCreateActions = (
   ns: string,
 ) => <O extends { [P in keyof O]: ((...args: any[]) => any) | (() => void)}, P extends string>(
   actionMap: O,
@@ -20,4 +19,4 @@ const createActions = (
   }, {} as O) as { [P in keyof O]: ((...args: Parameters<O[P]>) => { type: string, payload: ReturnType<O[P]> }) };
 };
 
-export default createActions;
+export default makeCreateActions;

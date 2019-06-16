@@ -1,4 +1,4 @@
-import { AsyncMetaOptional } from './AsyncMeta';
+import { AsyncData } from './AsyncData';
 import { User } from '../User';
 
-export type UserState = AsyncMetaOptional<User>;
+export type UserState = AsyncData<User>;

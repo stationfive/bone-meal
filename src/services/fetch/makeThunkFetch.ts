@@ -1,40 +1,57 @@
 import { Dispatch } from "redux";
+import { Store } from "types/Store/Store";
 import { AsyncActionSet } from "types/Store/AsyncActionSet";
 
 type ThunkConfigReq<RequestParams, Response> = {
+  fetchConfig: RequestInfo,
   asyncActionSet: AsyncActionSet<RequestParams, Response>,
 };
 
-type ThunkConfigOpt = {
-  authorized?: boolean,
+type ThunkConfigOpt<RequestParams, SuccessPayload> = {
+  authenticated: boolean,
+  transformResponse: (
+    resp: any,
+    extra?: { action: RequestParams, dispatch: Dispatch, getState?: () => Store },
+  ) => SuccessPayload | Promise<SuccessPayload>,
 }
 
-type ThunkConfig<RequestParams, Response> = ThunkConfigReq<RequestParams, Response> & ThunkConfigOpt;
+type ThunkConfigParams<RequestParams, SuccessPayload> =
+  ThunkConfigReq<RequestParams, SuccessPayload> & Partial<ThunkConfigOpt<RequestParams, SuccessPayload>>;
 
-export default function makeThunkFetch<RequestParams, Resp>(
-  fetchRequestInfo: RequestInfo,
-  passedThunkConfig: ThunkConfig<RequestParams, Resp>,
+type ThunkConfigDefaulted<RequestParams, SuccessPayload> =
+  ThunkConfigReq<RequestParams, SuccessPayload> & ThunkConfigOpt<RequestParams, SuccessPayload>;
+
+export default function makeThunkFetch<RequestParams, SuccessPayload>(
+  passedThunkConfig: ThunkConfigParams<RequestParams, SuccessPayload>,
 ) {
-  const thunkConfig: ThunkConfig<RequestParams, Resp> = {
-    authorized: false,
+  const thunkConfig: ThunkConfigDefaulted<RequestParams, SuccessPayload> = {
+    authenticated: false,
+    transformResponse: (resp: any): SuccessPayload => resp,
     ...passedThunkConfig,
   };
 
-  return (params: RequestParams) => (dispatch: Dispatch) => {
+  return (params: RequestParams) => (dispatch: Dispatch, getState?: () => Store) => {
     dispatch(thunkConfig.asyncActionSet.fetch(params));
-    fetch(fetchRequestInfo)
+    fetch(thunkConfig.fetchConfig)
       .then((response: Response) => {
         if (response.ok) {
           return response.json();
         } else {
           const err = new Error("Did not receive valid json response");
+          // @ts-ignore
           err.statusCode = response.status; // /!\
           throw err;
         }
       })
-      .then((response: {}) => {
-        // Warning: Assumes response is correct type
-        dispatch(thunkConfig.asyncActionSet.success(response as Resp));
+      .then(
+        (resp: any) => thunkConfig.transformResponse(resp, {
+          action: params,
+          dispatch,
+          ...(getState ? { getState } : {}),
+        }
+      ))
+      .then((response: SuccessPayload) => {
+        dispatch(thunkConfig.asyncActionSet.success(response));
       })
       .catch((err: any) => {
         const errors = (err.errors !== undefined && Array.isArray(err.errors)) ? err.errors

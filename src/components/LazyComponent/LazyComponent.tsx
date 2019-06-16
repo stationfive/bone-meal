@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { Loading } from 'components';
 
-const LazyRouter = (importPath: string) => {
-  const LazyComponent = React.lazy(() => import(`../../routes/${importPath}`));
+const LazyComponent = (srcRelativeImportPath: string) => {
+  const LazyComponent = React.lazy(() => import(`../../${srcRelativeImportPath}`));
 
   return (
     <Suspense fallback={<Loading />}>
@@ -11,4 +11,4 @@ const LazyRouter = (importPath: string) => {
   );
 };
 
-export default LazyRouter;
+export default LazyComponent;
