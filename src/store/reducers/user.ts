@@ -1,4 +1,4 @@
-import {handleActions} from "redux-actions";
+import { handleActions } from "redux-actions";
 import {
   presetReducers,
   asyncData,
@@ -14,7 +14,7 @@ const ns = 'USER';
 
 const reducer = handleActions<UserState, any>(
   {
-    // [userActions.logout.toString()]: presetReducers.empty,
+    // [userAction.logout.toString()]: presetReducers.empty,
     ...createAsyncReducers<User>(`${ns}/LOGIN`),
   },
   DEFAULT_STATE,

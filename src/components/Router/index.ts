@@ -1,5 +1,3 @@
-import Router from './Router.view';
-import generator from './Router.generator';
+import Router from './Router.container';
 
-// todo replace with container
-export default generator(Router);
+export default Router;

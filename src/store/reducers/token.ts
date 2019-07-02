@@ -6,7 +6,7 @@ const DEFAULT_STATE: TokenState = null;
 
 const reducer = handleActions<TokenState, any>(
   {
-    ["tokenActions.update"]: presetReducers.identity,
+    ["tokenActions.update"]: presetReducers.makeIdentity<TokenState>(),
     ["tokenActions.clear"]: presetReducers.empty,
   },
   DEFAULT_STATE,

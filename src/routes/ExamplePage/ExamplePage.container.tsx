@@ -1,27 +1,24 @@
 import React, {
   useState,
   FunctionComponent,
-  ReactElement,
 } from "react";
-import { fallback } from "utils/DataUtils";
+import useSelectorSafe from "store/selectors/useSelectorSafe";
+import useAuthGuard from "utils/Hooks/useAuthGuard";
+import { ExamplePageContainerProps } from "./ExamplePage.props";
 
-import { useDispatch, useSelector }  from "react-redux";
+const ExamplePageContainer: FunctionComponent<ExamplePageContainerProps> = (
+  { View, ...props }: ExamplePageContainerProps,
+) => {
+  useAuthGuard();
 
-import { ContainerProps} from "utils/TypeUtils/ContainerProps";
-import { ExamplePageProps, ExamplePageGeneratedProps, ExamplePagePublicProps} from "./ExamplePage.props";
-import {Store} from "../../types/Store/Store";
-
-type Props = ContainerProps<ExamplePagePublicProps, ExamplePageGeneratedProps>;
-
-const ExamplePageContainer: FunctionComponent<Props> = ({ View, ...props }: Props) => {
   const [toggle, setToggle] = useState(true);
-  const uid = useSelector(fallback<Store, string>(
-      // @ts-ignore
-      (_) => _.location.payload.uid,
-      '',
-    ));
+  const uid = useSelectorSafe<string>(
+    // @ts-ignore
+    (state) => state.user.data.id,
+    "",
+  );
 
-    return <View {...props} {...{ uid, toggle, setToggle }} />;
-  };
+  return <View {...props} {...{ uid, toggle, setToggle }} />;
+};
 
 export default ExamplePageContainer;

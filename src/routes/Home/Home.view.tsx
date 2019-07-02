@@ -14,7 +14,7 @@ const HomeView: FunctionComponent<HomeProps> = (props: HomeProps): ReactElement<
         Welcome home { props.loading ? '...' : userGreeting }
       </h1>
       { uid
-        ? <button onClick={() => props.link(uid)}>Home</button>
+        ? <button onClick={() => props.toProfile(userGreeting)}>Home</button>
         : <button onClick={props.login}>Log in</button>}
 
     </div>

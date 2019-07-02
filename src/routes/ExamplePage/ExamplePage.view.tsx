@@ -6,7 +6,6 @@ const ExamplePageView: FunctionComponent<ExamplePageProps> = (props: ExamplePage
   return (
     <div>
       <h1>
-        We made it
         User is { props.uid }
       </h1>
     </div>

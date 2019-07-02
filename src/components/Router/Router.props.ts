@@ -1,9 +1,11 @@
+// import { FunctionComponent } from "react";
+import { ContainerProps } from "utils/TypeUtils/ContainerProps";
+
 export type RouterPublicProps = {
-  components: {},
+  components: {
+    [k: string]: {
+      component: any,
+      path: string,
+    },
+  },
 };
-
-export type RouterGeneratedProps = {
-  location: any,
-}
-
-export type RouterProps = RouterPublicProps & RouterGeneratedProps;

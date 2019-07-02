@@ -1,4 +1,4 @@
-import { User } from "types/User";
+import {ContainerProps} from "utils/TypeUtils/ContainerProps";
 
 export type ExamplePageGeneratedProps = {
   toggle: boolean,
@@ -11,3 +11,5 @@ export type ExamplePagePublicProps = {
 }
 
 export type ExamplePageProps = ExamplePagePublicProps & ExamplePageGeneratedProps;
+export type ExamplePageContainerProps =
+  ContainerProps<ExamplePagePublicProps, ExamplePageGeneratedProps>;

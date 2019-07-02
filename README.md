@@ -1,8 +1,7 @@
 ## Todo
+ - MakeAuthedFetch
  - examplify useAsyncSelector (is this needed?)
- - examplify using object deconstruction with useSelector
  - authenticatedRoute
- - Debug why reducer isn't working with redux-actions handleReducers (or do custom)
  - expand with params like authenticate: asyncThunkFetch(fetch, { store config stuff like name })
  - add in thunks ExamplePage
  - example of lifecycle hook for onpage-load

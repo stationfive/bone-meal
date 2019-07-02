@@ -15,10 +15,12 @@ import {
   Persistor,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import promise from 'redux-promise-middleware'
 import queryString from 'query-string';
-import { PATHS } from 'consts';
+import routes  from 'routes';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
+import {mapObj} from "../utils/DataUtils";
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
@@ -35,12 +37,14 @@ const persistConfig: PersistConfig = {
   ],
 };
 
+const routePaths = mapObj(route => route.path)(routes);
+
 const router: {
   reducer: Reducer,
   middleware: Middleware,
   enhancer: StoreEnhancer,
   initialDispatch?: () => void,
-} = connectRoutes(PATHS, routerConfig);
+} = connectRoutes(routePaths, routerConfig);
 
 const combinedReducer: Reducer = persistCombineReducers(
   persistConfig,
@@ -55,6 +59,7 @@ const middlewareEnhancer: Function =
   applyMiddleware(
     router.middleware,
     thunk,
+    promise,
   );
 
 const composedEnhancers: StoreEnhancer = (isProd ? compose : composeWithDevTools)(

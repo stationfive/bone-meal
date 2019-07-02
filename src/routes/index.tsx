@@ -1,14 +1,17 @@
 import React, { ReactComponentElement } from 'react';
 import { ROUTES } from 'consts';
-import LazyComponent from 'components/LazyComponent/LazyComponent';
-import { mapObj } from 'utils/DataUtils';
 
-const componentsFolders = {
-  [ROUTES.ROOT]: 'Home',
-  [ROUTES.EXAMPLE]: 'ExamplePage',
-  [ROUTES.NOT_FOUND]: 'NotFound',
+export default {
+  [ROUTES.ROOT]: {
+    component: 'Home',
+    path: '/',
+  },
+  [ROUTES.EXAMPLE]: {
+    component: 'ExamplePage',
+    path: '/eg/:slug',
+  },
+  [ROUTES.NOT_FOUND]: {
+    component: 'NotFound',
+    path: '/404',
+  },
 };
-
-export default mapObj((val: string): () => ReactComponentElement<any> =>
-  () => LazyComponent(`routes/${val}`)
-)(componentsFolders);
