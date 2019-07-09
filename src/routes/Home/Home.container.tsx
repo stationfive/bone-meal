@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { HomeContainerProps } from "./Home.props";
 import useSelectorSafe from "store/selectors/useSelectorSafe";
@@ -11,7 +11,7 @@ import { ROUTES } from "consts";
 
 const userFallback: UserState = asyncData(LOADING_STATES.ERROR, ['Could not load user']);
 
-const HomeContainer: FunctionComponent<HomeContainerProps> = (
+const HomeContainer: FC<HomeContainerProps> = (
   { View, ...props }: HomeContainerProps,
 ) => {
   const {

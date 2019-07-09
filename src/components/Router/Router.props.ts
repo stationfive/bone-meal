@@ -1,4 +1,4 @@
-// import { FunctionComponent } from "react";
+// import { FC } from "react";
 import { ContainerProps } from "utils/TypeUtils/ContainerProps";
 
 export type RouterPublicProps = {

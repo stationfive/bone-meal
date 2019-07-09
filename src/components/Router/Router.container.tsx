@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { RouterPublicProps } from './Router.props';
 import useSelectorSafe from "store/selectors/useSelectorSafe";
 import LazyComponent from "../LazyComponent/LazyComponent";
 
-const RouterContainer: FunctionComponent<RouterPublicProps> = (
+const RouterContainer: FC<RouterPublicProps> = (
   props: RouterPublicProps,
 ) => {
   const location = useSelectorSafe<string>((state) => state.location.type, '');

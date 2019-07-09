@@ -1,12 +1,12 @@
 import React, {
   useState,
-  FunctionComponent,
+  FC,
 } from "react";
 import useSelectorSafe from "store/selectors/useSelectorSafe";
 import useAuthGuard from "utils/Hooks/useAuthGuard";
 import { ExamplePageContainerProps } from "./ExamplePage.props";
 
-const ExamplePageContainer: FunctionComponent<ExamplePageContainerProps> = (
+const ExamplePageContainer: FC<ExamplePageContainerProps> = (
   { View, ...props }: ExamplePageContainerProps,
 ) => {
   useAuthGuard();

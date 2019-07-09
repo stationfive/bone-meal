@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import View from './Home.view';
 import Container from './Home.container';
 import { HomePublicProps } from "./Home.props";
 
-const Home: FunctionComponent<HomePublicProps> =
+const Home: FC<HomePublicProps> =
   (props: HomePublicProps) => Container({ View, ...props });
 
 export default Home;

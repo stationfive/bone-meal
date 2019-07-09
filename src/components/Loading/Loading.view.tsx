@@ -1,6 +1,6 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement, FC } from 'react';
 
-const Loading: FunctionComponent = (): ReactElement<'div'> => {
+const Loading: FC = (): ReactElement<'div'> => {
   return (
     <div className={'loading loading--active'}>
       <div className="loading__screen">

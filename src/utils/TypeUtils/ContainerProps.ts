@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react";
+import { FC } from "react";
 
 export type ContainerProps<PublicProps, ContainerProps = {}> = PublicProps & {
-  View: FunctionComponent<PublicProps & ContainerProps>,
+  View: FC<PublicProps & ContainerProps>,
 }
