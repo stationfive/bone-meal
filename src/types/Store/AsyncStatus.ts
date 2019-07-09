@@ -1,4 +1,4 @@
-export enum LOADING_STATES {
+export enum ASYNC_STATUS {
   INITIAL,
   LOADING,
   COMPLETE,

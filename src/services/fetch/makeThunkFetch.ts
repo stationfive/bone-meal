@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
 import { Store } from "types/Store/Store";
-import { AsyncActionSet } from "types/Store/AsyncActionSet";
 
 type ThunkConfigReq<RequestParams, Response> = {
   fetchConfig: RequestInfo,

@@ -1,20 +1,20 @@
-import { LOADING_STATES } from "./LoadingStates";
+import { ASYNC_STATUS } from "./AsyncStatus";
 import { Optional } from "utils/TypeUtils/Optional";
 
 export type AsyncData<T> = {
-  state: LOADING_STATES.INITIAL,
+  status: ASYNC_STATUS.INITIAL,
   errors: [],
   data: Optional<T>,
 } | {
-  state: LOADING_STATES.LOADING,
+  status: ASYNC_STATUS.LOADING,
   errors: [],
   data: Optional<T>,
 } | {
-  state: LOADING_STATES.ERROR,
+  status: ASYNC_STATUS.ERROR,
   errors: {}[],
   data: Optional<T>,
 } | {
-  state: LOADING_STATES.COMPLETE,
+  status: ASYNC_STATUS.COMPLETE,
   errors: [],
   data: T,
 }

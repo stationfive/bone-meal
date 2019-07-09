@@ -1,28 +1,28 @@
 import { AsyncData } from "types/Store/AsyncData";
-import {LOADING_STATES} from "types/Store/LoadingStates";
+import {ASYNC_STATUS} from "types/Store/AsyncStatus";
 import {Optional} from "../../TypeUtils/Optional";
 
-export function asyncData<T>(state: LOADING_STATES.INITIAL, data?: Optional<T>, _?: Optional<T>): AsyncData<T>;
-export function asyncData<T>(state: LOADING_STATES.LOADING, data?: Optional<T>, _?: Optional<T>): AsyncData<T>;
-export function asyncData<T>(state: LOADING_STATES.COMPLETE, data: T, _?: Optional<T>): AsyncData<T>;
-export function asyncData<T>(state: LOADING_STATES.ERROR, errors: any[], data?: Optional<T>): AsyncData<T>;
-export function asyncData<T>(state: LOADING_STATES, errorsOrData: any, data?: Optional<T>): AsyncData<T> {
-  if (state & LOADING_STATES.LOADING) {
+export function asyncData<T>(status: ASYNC_STATUS.INITIAL, data?: Optional<T>, _?: Optional<T>): AsyncData<T>;
+export function asyncData<T>(status: ASYNC_STATUS.LOADING, data?: Optional<T>, _?: Optional<T>): AsyncData<T>;
+export function asyncData<T>(status: ASYNC_STATUS.COMPLETE, data: T, _?: Optional<T>): AsyncData<T>;
+export function asyncData<T>(status: ASYNC_STATUS.ERROR, errors: any[], data?: Optional<T>): AsyncData<T>;
+export function asyncData<T>(status: ASYNC_STATUS, errorsOrData: any, data?: Optional<T>): AsyncData<T> {
+  if (status & ASYNC_STATUS.LOADING) {
     return {
       errors: [],
-      state: LOADING_STATES.LOADING,
+      status: ASYNC_STATUS.LOADING,
       data: errorsOrData,
     };
-  } else if (state & (LOADING_STATES.COMPLETE | LOADING_STATES.INITIAL)) {
+  } else if (status & (ASYNC_STATUS.COMPLETE | ASYNC_STATUS.INITIAL)) {
     return {
       errors: [],
-      state,
+      status,
       data: errorsOrData,
     }
   } else {
     return {
       errors: errorsOrData,
-      state: LOADING_STATES.ERROR,
+      status: ASYNC_STATUS.ERROR,
       data,
     }
   }

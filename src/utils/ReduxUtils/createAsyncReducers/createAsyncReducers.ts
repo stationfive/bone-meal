@@ -1,4 +1,4 @@
-import { LOADING_STATES } from "types/Store/LoadingStates";
+import { ASYNC_STATUS } from "types/Store/AsyncStatus";
 import { asyncData } from '..';
 import { AsyncData } from "types/Store/AsyncData";
 import { Action } from "redux-actions";
@@ -8,11 +8,13 @@ export const createAsyncReducers = <StateType>(
 ) => {
   return {
     [`${actionNameSnake}_PENDING`]: (state: AsyncData<StateType>, action: Action<undefined>) =>
-      asyncData<StateType>(LOADING_STATES.LOADING),
+      asyncData<StateType>(ASYNC_STATUS.LOADING),
+
     [`${actionNameSnake}_FULFILLED`]: (state: AsyncData<StateType>, action: Action<StateType>) =>
-      asyncData(LOADING_STATES.COMPLETE, action.payload),
+      asyncData(ASYNC_STATUS.COMPLETE, action.payload),
+
     [`${actionNameSnake}_REJECTED`]: (state: AsyncData<StateType>, action: Action<any[]>) =>
-      asyncData<StateType>(LOADING_STATES.ERROR, action.payload),
+      asyncData<StateType>(ASYNC_STATUS.ERROR, action.payload),
   }
 };
 

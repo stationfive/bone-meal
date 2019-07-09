@@ -6,9 +6,9 @@ import {
 } from "utils/ReduxUtils";
 import { User } from 'types/User';
 import { UserState } from 'types/Store/UserState';
-import { LOADING_STATES } from 'types/Store/LoadingStates';
+import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
 
-const DEFAULT_STATE: UserState = asyncData(LOADING_STATES.INITIAL);
+const DEFAULT_STATE: UserState = asyncData(ASYNC_STATUS.INITIAL);
 
 const ns = 'USER';
 
