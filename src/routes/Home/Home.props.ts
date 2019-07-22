@@ -1,8 +1,9 @@
 import { ContainerProps } from "utils/TypeUtils/ContainerProps";
+import { RouteDef } from "types/RouteDef";
 import { User } from "types/User";
 
 export type HomePublicProps = {
-  // no props can be passed to pages
+  route: RouteDef,
 }
 
 export type HomeGeneratedProps = {

@@ -1,5 +1,6 @@
 ## Todo
  - MakeAuthedFetch
+ - CodeGen
  - examplify useAsyncSelector (is this needed?)
  - authenticatedRoute
  - expand with params like authenticate: asyncThunkFetch(fetch, { store config stuff like name })
@@ -12,7 +13,6 @@
  - ? Should store be grouped by domain rather than type 
 ---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -41,17 +41,103 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Architecture / how-to
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Routes...
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+...are defined in `/src/routes/index.tsx` and corresponding directories, e.g. `/src/routes/MyRoute/`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+A route is defined as: 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+  MY_ROUTE: {
+    component: 'MyRoute',
+    path: '/your/route-path/',
+  },
+  ROUTE_WITH_PATH_PARAM: {
+    component: 'ParamRoute',
+    path: '/static-bit/:paramBit',
+  },
+```
+
+The route definition object will be passed to your route as the prop `route`, just in case you need
+it, or want to define any meta-data (e.g. auth permissioning).
+
+(Module: redux-first-router) handles most of this, and navigation is all available through redux.
+
+To initiate navigation to a page, dispatch a `/src/store/actions/router.link` action with a reference
+to the route.  E.g.:
+
+```
+dispatch(routerActions.link(ROUTES.MY_ROUTE));
+```
+
+**Important:** the 'component' value of your route *needs to match* a 
+folder name under `/src/routes/`.  The default export from that folder will be automatically 
+lazy-loaded upon browsing to the path.  (`create route` will handle this for you anyway).
+
+
+#### Components...
+
+ - Use hooks: for state, lifecycle, redux / global state
+ - Separate this complex/stateful logic into the 'MyComponent.container.tsx' file
+ - Define template with minimal logic in 'MyComponent.view.tsx' file
+ - Define the props in your 'MyComponent.props.ts' file
+
+todo
+
+#### Redux state...
+
+The data type of the redux store is defined in `/src/types/Store/Store.ts`. It looks something like:
+
+```
+import { LocationState } from 'redux-first-router';
+import { UserState } from './UserState';
+import { TokenState } from './TokenState';
+
+export type Store = {
+  location: LocationState,
+  token: TokenState,
+  user: UserState,
+}
+```
+
+Each reducer has a state type defined.  Often this can be a simple alias to another type
+of data, an object map of other types, or in the case of a reducer used to store asynchronous data,
+use the AsyncData generic.
+
+We recommend defining your data type separately (e.g. under `/src/types/`) to your Store type, as
+often the store grows to hold more data and you will need to make this distinction. 
+
+#### Making asynchronous requests 
+
+## Code-generation
+
+\**Still todo*\*
+
+BoneMeal comes with code creation to speed things up.
+
+**Routes**
+
+`npm run create route MyNewRoute`
+
+**Components**
+
+`npm run create route MyNewComponent`
+
+**Types**
+
+`npm run create type MyNewType`
+
+**Redux**
+
+This will add a new reducer key to redux, including types if they do not already exist. 
+
+`npm run create redux:reducer MyReducer`
 
 ## Learn More
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 

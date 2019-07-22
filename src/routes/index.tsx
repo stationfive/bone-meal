@@ -1,17 +1,22 @@
 import React, { ReactComponentElement } from 'react';
-import { ROUTES } from 'consts';
+import { NOT_FOUND as RFR_NOT_FOUND } from 'redux-first-router';
+import { RouteDef } from 'types/RouteDef';
+import { copyObjKeys } from 'utils/DataUtils';
 
-export default {
-  [ROUTES.ROOT]: {
+const ROUTES: { [k: string]: RouteDef } = {
+  ROOT: {
     component: 'Home',
     path: '/',
   },
-  [ROUTES.EXAMPLE]: {
+  EXAMPLE: {
     component: 'ExamplePage',
     path: '/eg/:slug',
   },
-  [ROUTES.NOT_FOUND]: {
+  NOT_FOUND: {
     component: 'NotFound',
     path: '/404',
+    name: RFR_NOT_FOUND,
   },
 };
+
+export default copyObjKeys(ROUTES, 'name');

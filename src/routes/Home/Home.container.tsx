@@ -7,7 +7,7 @@ import { UserState } from "types/Store/UserState";
 import { ASYNC_STATUS } from "types/Store/AsyncStatus";
 import { asyncData } from "utils/ReduxUtils";
 import { routerActions } from "store/actions";
-import { ROUTES } from "consts";
+import ROUTES from "routes";
 
 const userFallback: UserState = asyncData(ASYNC_STATUS.ERROR, ['Could not load user']);
 

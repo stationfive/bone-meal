@@ -17,7 +17,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import promise from 'redux-promise-middleware'
 import queryString from 'query-string';
-import routes  from 'routes';
+import routes from 'routes';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import {mapObj} from "../utils/DataUtils";
@@ -37,7 +37,15 @@ const persistConfig: PersistConfig = {
   ],
 };
 
-const routePaths = mapObj(route => route.path)(routes);
+
+// Transform ROUTES to have `ROUTER/` prefix and map to path
+const routePaths = Object.keys(routes).reduce(
+  (processedRoutes, routeKey) => ({
+    ...processedRoutes,
+    [`ROUTER/${routeKey}`]: routes[routeKey].path,
+  }),
+  {},
+);
 
 const router: {
   reducer: Reducer,

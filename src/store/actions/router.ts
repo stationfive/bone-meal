@@ -1,10 +1,11 @@
 import { Action } from 'types/Action';
+import { RouteDef } from 'types/RouteDef';
 
 const link: Function = <P>(
-  nextRoute: string,
+  nextRoute: RouteDef,
   payload: P,
 ): Action<P> => ({
-  type: nextRoute,
+  type: `ROUTER/${nextRoute.name}`,
   payload,
 });
 
