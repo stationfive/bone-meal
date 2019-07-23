@@ -1,6 +1,3 @@
-// import { FC } from "react";
-import { ContainerProps } from "utils/TypeUtils/ContainerProps";
-
 export type RouterPublicProps = {
   components: {
     [k: string]: {

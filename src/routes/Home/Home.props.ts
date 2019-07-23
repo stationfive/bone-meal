@@ -1,4 +1,3 @@
-import { ContainerProps } from "utils/TypeUtils/ContainerProps";
 import { RouteDef } from "types/RouteDef";
 import { User } from "types/User";
 
@@ -6,7 +5,7 @@ export type HomePublicProps = {
   route: RouteDef,
 }
 
-export type HomeGeneratedProps = {
+type HomeCalcedProps = {
   user?: User,
   toProfile: (slug: string) => void,
   login: () => void,
@@ -14,5 +13,4 @@ export type HomeGeneratedProps = {
   errors: {}[],
 }
 
-export type HomeProps = HomePublicProps & HomeGeneratedProps;
-export type HomeContainerProps = ContainerProps<HomePublicProps, HomeGeneratedProps>;
+export type HomeProps = HomePublicProps & HomeCalcedProps;

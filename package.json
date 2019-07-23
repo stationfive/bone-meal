@@ -32,7 +32,7 @@
     "@types/redux-first-router": "2.1.1",
     "@types/redux-persist": "4.3.1",
     "@types/redux-thunk": "2.1.0",
-    "domakey": "0.0.4",
+    "domakey": "0.0.6",
     "prettier": "1.16.4",
     "redux-devtools-extension": "2.13.7"
   },

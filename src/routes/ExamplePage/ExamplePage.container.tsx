@@ -4,10 +4,11 @@ import React, {
 } from "react";
 import useSelectorSafe from "store/selectors/useSelectorSafe";
 import useAuthGuard from "utils/Hooks/useAuthGuard";
-import { ExamplePageContainerProps } from "./ExamplePage.props";
+import { ExamplePagePublicProps, ExamplePageProps } from "./ExamplePage.props";
+import ExamplePageView from "./ExamplePage.view";
 
-const ExamplePageContainer: FC<ExamplePageContainerProps> = (
-  { View, ...props }: ExamplePageContainerProps,
+const ExamplePageContainer: FC<ExamplePagePublicProps> = (
+  props: ExamplePagePublicProps,
 ) => {
   useAuthGuard();
 
@@ -18,7 +19,7 @@ const ExamplePageContainer: FC<ExamplePageContainerProps> = (
     "",
   );
 
-  return <View {...props} {...{ uid, toggle, setToggle }} />;
+  return <ExamplePageView {...props} {...{ uid, toggle, setToggle }} />;
 };
 
 export default ExamplePageContainer;

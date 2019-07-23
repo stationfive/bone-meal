@@ -1,10 +1,3 @@
-import React, { FC } from 'react';
-import View from './ExamplePage.view';
-import Container from './ExamplePage.container';
-import { ExamplePagePublicProps } from "./ExamplePage.props";
+import ExamplePageContainer from './ExamplePage.container';
 
-
-const ExamplePage: FC<ExamplePagePublicProps> =
-  (props: ExamplePagePublicProps) => Container({ View, ...props});
-
-export default ExamplePage;
+export default ExamplePageContainer;

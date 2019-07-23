@@ -1,9 +1,3 @@
-import { FC } from 'react';
-import View from './Home.view';
-import Container from './Home.container';
-import { HomePublicProps } from "./Home.props";
+import HomeContainer from './Home.container';
 
-const Home: FC<HomePublicProps> =
-  (props: HomePublicProps) => Container({ View, ...props });
-
-export default Home;
+export default HomeContainer;

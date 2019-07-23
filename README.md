@@ -11,6 +11,7 @@
  - obviate redux and use context
  - define custom error for AsyncData['errors']
  - ? Should store be grouped by domain rather than type 
+ - Modals / confirmation 
 ---
 
 
