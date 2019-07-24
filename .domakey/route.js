@@ -74,6 +74,11 @@ export default {{RouteName}}Container;
 `;
 
 module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
+  if (cliFlags['h'] || !cliArgs[0]) {
+    makey.print(help);
+    return;
+  }
+
   const routeName = makey.toLowerCaseFirst(
     cliArgs[0] || (await makey.ask('Name of your route:'))
   );
@@ -81,11 +86,15 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
 
   const RouteName = makey.toUpperCaseFirst(routeName);
 
-  const ROUTE_NAME = (await makey.ask(
+  const ROUTE_NAME = cliFlags['y']
+    ? makey.camelToSnakeCaps(routeName)
+    : (await makey.ask(
     `Identifier for your route: (${makey.camelToSnakeCaps(routeName)})`
   )) || makey.camelToSnakeCaps(routeName);
 
-  const makeContainer = (await makey.askYN('Create a (smart) container for the route?'));
+  const makeContainer = cliFlags['y']
+    ? true
+    : cliFlags['container'] || (await makey.askYN('Create a (smart) container for the route?'));
 
   const viewFilled = makey.templateReplace(viewBody, { RouteName });
 
@@ -98,7 +107,9 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     ? makey.templateReplace(propsCalcBody, { RouteName })
     : '';
 
-  const path = (await makey.ask(`URL path (${makey.camelToKebab(routeName)}):`)) || makey.camelToKebab(routeName);
+  const path = cliFlags['y']
+    ? makey.camelToKebab(routeName)
+    : (await makey.ask(`URL path (${makey.camelToKebab(routeName)}):`)) || makey.camelToKebab(routeName);
 
   const propsFilled = makey.templateReplace(propsBody, {
     propsExports: makeContainer ? propsExportsWCont : propsExportsWOCont,
@@ -152,3 +163,15 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     ),
   );
 };
+
+const help = `Adds a new React 'route' component.
+
+This will create the new route folder (/src/routes/MyRouteName), the route files,
+and add to the index in /src/routes/index.tsx
+
+\`npm run domakey route MyRouteName\`
+
+Options:
+ --container    Create container by default
+ --y            Accept all default suggestions
+`;
