@@ -1,5 +1,5 @@
 import createActions from './makeCreateActions';
-import { presetActions } from "../";
+import { presetActions } from '..';
 
 describe('utils/ReduxUtils/makeCreateAction', () => {
   const namespace = 'NAMESPACE';
@@ -13,7 +13,9 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
   });
 
   describe('identity actionCreator', () => {
-    const testAction = createTestAction({ idTest: presetActions.makeIdentity() });
+    const testAction = createTestAction({
+      idTest: presetActions.makeIdentity(),
+    });
 
     test('returns action id and actionCreator', () => {
       expect(testAction.idTest.toString()).toEqual('NAMESPACE/ID_TEST');
@@ -24,7 +26,7 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
       const action = testAction.idTest(fixture);
 
       expect(action).toEqual({ type: 'NAMESPACE/ID_TEST', payload: fixture });
-    })
+    });
   });
 
   describe('void actionCreator', () => {
@@ -41,7 +43,10 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
     test('called creates expected action', () => {
       const action = testAction.voidTest();
 
-      expect(action).toEqual({ type: 'NAMESPACE/VOID_TEST', payload: undefined });
-    })
+      expect(action).toEqual({
+        type: 'NAMESPACE/VOID_TEST',
+        payload: undefined,
+      });
+    });
   });
 });

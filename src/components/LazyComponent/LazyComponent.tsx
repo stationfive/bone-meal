@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
-import { Loading } from 'components';
+import Loading from 'components/Loading';
 
 const LazyComponent = (srcRelativeImportPath: string, props: {} = {}) => {
-  const LazyComponent = React.lazy(() => import(`../../${srcRelativeImportPath}`));
+  const Component = React.lazy(() => import(`../../${srcRelativeImportPath}`));
 
   return (
     <Suspense fallback={<Loading />}>
-      <LazyComponent {...props} />
+      <Component {...props} />
     </Suspense>
   );
 };

@@ -1,18 +1,18 @@
 import copyObjKeys from './copyObjKeys';
 
 describe('utils/DataUtils/copyObjKeys', () => {
-  const fixture: Object = {
+  const fixture: Record<string, any> = {
     a: { c: 2 },
     b: { c: 4 },
   };
 
   test('copies keys into contained object', () => {
-    const expected: Object = {
-      a: {c: 2, key: 'a'},
-      b: {c: 4, key: 'b'},
+    const expected: Record<string, any> = {
+      a: { c: 2, key: 'a' },
+      b: { c: 4, key: 'b' },
     };
 
-    const result: Object = copyObjKeys(fixture);
+    const result: Record<string, any> = copyObjKeys(fixture);
 
     expect(result).toEqual(expected);
   });

@@ -1,9 +1,11 @@
 ## Todo
  - MakeAuthedFetch
  - CodeGen
+ - Solve dependency cycles (for testing of Components)
  - examplify useAsyncSelector (is this needed?)
+ - useAsyncState -> useAsyncData to be compatible with authFetch
  - authenticatedRoute
- - expand with params like authenticate: asyncThunkFetch(fetch, { store config stuff like name })
+ - expand with params like authenticate: asyncThunkFetch(/* see workflowy note */)
  - add in thunks ExamplePage
  - example of lifecycle hook for onpage-load
  - example of redux-listener (for commonly triggered)
@@ -111,6 +113,13 @@ We recommend defining your data type separately (e.g. under `/src/types/`) to yo
 often the store grows to hold more data and you will need to make this distinction. 
 
 #### Making asynchronous requests 
+
+**Single-purpose requests**
+
+Requests that will only be used on one screen should be stored along-side the component.
+
+Use the `useAsyncData` { /!\ todo: rename } hook in the component controller to initiate the request
+when required, and manage the response.
 
 ## Code-generation
 

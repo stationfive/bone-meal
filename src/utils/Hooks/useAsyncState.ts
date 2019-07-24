@@ -1,8 +1,8 @@
-import {useState} from 'react';
-import {AsyncData} from "types/Store/AsyncData";
-import {asyncData} from "../ReduxUtils";
-import {ASYNC_STATUS} from "../../types/Store/AsyncStatus";
-import {Optional} from "../TypeUtils/Optional";
+import { useState } from 'react';
+import { AsyncData } from 'types/Store/AsyncData';
+import { asyncData } from '../ReduxUtils';
+import { ASYNC_STATUS } from '../../types/Store/AsyncStatus';
+import { Optional } from '../TypeUtils/Optional';
 
 export default function useAsyncState<PromParams extends any[], Response>(
   asyncFn: (...params: PromParams) => Promise<Response>,

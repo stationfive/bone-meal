@@ -1,15 +1,13 @@
-import {authActions} from "store/actions";
-import makeThunkFetch from "services/fetch/makeThunkFetch";
-import {Dispatch} from "redux";
-import {Store} from "../../types/Store/Store";
+import { authActions } from 'store/actions';
+import makeThunkFetch from 'services/fetch/makeThunkFetch';
+import { Dispatch } from 'redux';
+import { Store } from '../../types/Store/Store';
 
-export const login = (credentials: string) => (dispatch: Dispatch, state: Store) => {
-  dispatch(authActions.login(new Promise((res, rej) => {
-    setTimeout(() => res({
-      id: 'abc123',
-      email: 'some@email.com',
-    }), 1000);
-  })));
+export const login = (credentials: string) => (
+  dispatch: Dispatch,
+  state: Store,
+) => {
+  dispatch(authActions.login());
 };
 //   makeThunkFetch(
 //   {
@@ -24,4 +22,4 @@ export const login = (credentials: string) => (dispatch: Dispatch, state: Store)
 
 export default {
   login,
-}
+};

@@ -1,5 +1,5 @@
-export type RouteDef = {
-  component: string,
-  path: string,
-  name?: string,
+export interface RouteDef {
+  component: string;
+  path: string;
+  name: string;
 }

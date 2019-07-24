@@ -11,12 +11,12 @@ import * as serviceWorker from './serviceWorker';
 const root: HTMLElement | null = document.getElementById('root');
 
 if (root) {
-  ReactDOM.render((
-      <Provider store={storeConfig.store}>
-        <PersistGate persistor={storeConfig.persistor}>
-          <Router components={RouteComponents} />
-        </PersistGate>
-      </Provider>),
+  ReactDOM.render(
+    <Provider store={storeConfig.store}>
+      <PersistGate persistor={storeConfig.persistor}>
+        <Router components={RouteComponents} />
+      </PersistGate>
+    </Provider>,
     root,
   );
 }

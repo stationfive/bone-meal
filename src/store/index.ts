@@ -4,7 +4,8 @@ import {
   createStore,
   Reducer,
   Middleware,
-  StoreEnhancer, Store,
+  StoreEnhancer,
+  Store,
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { connectRoutes } from 'redux-first-router';
@@ -15,16 +16,18 @@ import {
   Persistor,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import promise from 'redux-promise-middleware'
+import promise from 'redux-promise-middleware';
 import queryString from 'query-string';
 import routes from 'routes';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import {mapObj} from "../utils/DataUtils";
+import { mapObj, fallback } from '../utils/DataUtils';
 
-const isProd: boolean = process.env.NODE_ENV === 'production';
+const isProd: boolean =
+  fallback<NodeJS.Process, string>(p => p.env.NODE_ENV, '', process) ===
+  'production';
 
-const routerConfig: Object = {
+const routerConfig: Record<string, any> = {
   initialDispatch: false,
   querySerializer: queryString,
 };
@@ -32,11 +35,8 @@ const routerConfig: Object = {
 const persistConfig: PersistConfig = {
   key: 'root',
   storage,
-  whitelist: [
-    'token',
-  ],
+  whitelist: ['token'],
 };
-
 
 // Transform ROUTES to have `ROUTER/` prefix and map to path
 const routePaths = Object.keys(routes).reduce(
@@ -48,10 +48,10 @@ const routePaths = Object.keys(routes).reduce(
 );
 
 const router: {
-  reducer: Reducer,
-  middleware: Middleware,
-  enhancer: StoreEnhancer,
-  initialDispatch?: () => void,
+  reducer: Reducer;
+  middleware: Middleware;
+  enhancer: StoreEnhancer;
+  initialDispatch?: () => void;
 } = connectRoutes(routePaths, routerConfig);
 
 const combinedReducer: Reducer = persistCombineReducers(
@@ -63,29 +63,27 @@ const combinedReducer: Reducer = persistCombineReducers(
   },
 );
 
-const middlewareEnhancer: Function =
-  applyMiddleware(
-    router.middleware,
-    thunk,
-    promise,
-  );
+const middlewareEnhancer: Function = applyMiddleware(
+  router.middleware,
+  thunk,
+  promise,
+);
 
-const composedEnhancers: StoreEnhancer = (isProd ? compose : composeWithDevTools)(
+const composedEnhancers: StoreEnhancer = (isProd
+  ? compose
+  : composeWithDevTools)(
   router.enhancer,
   // @ts-ignore
   middlewareEnhancer,
 );
 
-const store: Store = createStore(
-  combinedReducer,
-  composedEnhancers,
-);
+const store: Store = createStore(combinedReducer, composedEnhancers);
 
 const persistor: Persistor = persistStore(store, undefined, () => {
   if (router.initialDispatch !== undefined) router.initialDispatch();
 });
 
-export default ({
+export default {
   store,
   persistor,
-});
+};

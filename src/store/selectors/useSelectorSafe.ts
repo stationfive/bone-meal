@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import { Optional } from "utils/TypeUtils/Optional";
-import { fallback } from "utils/DataUtils";
-import { Store } from "types/Store/Store";
+import { useSelector } from 'react-redux';
+import { Optional } from 'utils/TypeUtils/Optional';
+import { fallback } from 'utils/DataUtils';
+import { Store } from 'types/Store/Store';
 
 function useSelectorSafe<Value>(
   fn: (optimisticObj: Required<Store>) => Optional<Value>,

@@ -1,6 +1,6 @@
-import {Optional} from "utils/TypeUtils/Optional";
+import { Optional } from 'utils/TypeUtils/Optional';
 
-const _fallback = <Obj, Value>(
+const execFallback = <Obj, Value>(
   fn: (optimisticObj: Required<Obj>) => Optional<Value>,
   defaultVal: Value,
   obj: Obj,
@@ -20,17 +20,17 @@ function fallback<Obj, Value>(
 ): Value;
 function fallback<Obj, Value>(
   fn: (optimisticObj: Required<Obj>) => Optional<Value>,
-  defaultVal: Value
-): ((obj2: Obj) => Value);
+  defaultVal: Value,
+): (obj2: Obj) => Value;
 function fallback<Obj, Value>(
   fn: (optimisticObj: Required<Obj>) => Optional<Value>,
   defaultVal: Value,
   obj1?: Obj,
 ) {
   if (obj1 !== undefined) {
-    return _fallback<Obj, Value>(fn, defaultVal, obj1);
+    return execFallback<Obj, Value>(fn, defaultVal, obj1);
   }
-  return (obj2: Obj): Value => _fallback(fn, defaultVal, obj2);
+  return (obj2: Obj): Value => execFallback(fn, defaultVal, obj2);
 }
 
 export default fallback;

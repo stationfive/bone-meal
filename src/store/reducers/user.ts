@@ -1,9 +1,9 @@
-import { handleActions } from "redux-actions";
+import { handleActions } from 'redux-actions';
 import {
   presetReducers,
   asyncData,
   createAsyncReducers,
-} from "utils/ReduxUtils";
+} from 'utils/ReduxUtils';
 import { User } from 'types/User';
 import { UserState } from 'types/Store/UserState';
 import { ASYNC_STATUS } from 'types/Store/AsyncStatus';

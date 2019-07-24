@@ -18,7 +18,8 @@
     "redux-promise-middleware": "6.1.1",
     "redux-promise-middleware-actions": "2.1.0",
     "redux-thunk": "2.3.0",
-    "typescript": "3.5.1"
+    "typescript": "3.5.1",
+    "redux-devtools-extension": "2.13.7"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",
@@ -32,18 +33,36 @@
     "@types/redux-first-router": "2.1.1",
     "@types/redux-persist": "4.3.1",
     "@types/redux-thunk": "2.1.0",
+    "@typescript-eslint/eslint-plugin": "1.13.0",
+    "@typescript-eslint/parser": "1.13.0",
     "domakey": "0.0.6",
-    "prettier": "1.16.4",
-    "redux-devtools-extension": "2.13.7"
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "13.2.0",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-config-react": "1.1.7",
+    "eslint-import-resolver-typescript": "1.1.1",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-react": "7.14.3",
+    "husky": "3.0.1",
+    "prettier": "1.16.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix './src/**/*.{ts,tsx}' && echo 'lint completed successfully'",
+    "format": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint"
+    }
   },
   "browserslist": {
     "production": [

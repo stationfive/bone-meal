@@ -1,8 +1,8 @@
-export type RouterPublicProps = {
+export interface RouterPublicProps {
   components: {
     [k: string]: {
-      component: any,
-      path: string,
-    },
-  },
-};
+      component: any;
+      path: string;
+    };
+  };
+}

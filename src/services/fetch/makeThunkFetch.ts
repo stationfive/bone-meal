@@ -1,24 +1,37 @@
-import { Dispatch } from "redux";
-import { Store } from "types/Store/Store";
+import { Dispatch } from 'redux';
+import { Store } from 'types/Store/Store';
 
-type ThunkConfigReq<RequestParams, Response> = {
-  fetchConfig: RequestInfo,
-  asyncActionSet: AsyncActionSet<RequestParams, Response>,
-};
+// todo: needs updating
+type AsyncActionSet<A, B> = [A, B];
 
-type ThunkConfigOpt<RequestParams, SuccessPayload> = {
-  authenticated: boolean,
-  transformResponse: (
-    resp: any,
-    extra?: { action: RequestParams, dispatch: Dispatch, getState?: () => Store },
-  ) => SuccessPayload | Promise<SuccessPayload>,
+interface ThunkConfigReq<RequestParams, Response> {
+  fetchConfig: RequestInfo;
+  asyncActionSet: AsyncActionSet<RequestParams, Response>;
 }
 
-type ThunkConfigParams<RequestParams, SuccessPayload> =
-  ThunkConfigReq<RequestParams, SuccessPayload> & Partial<ThunkConfigOpt<RequestParams, SuccessPayload>>;
+interface ThunkConfigOpt<RequestParams, SuccessPayload> {
+  authenticated: boolean;
+  transformResponse: (
+    resp: any,
+    extra?: {
+      action: RequestParams;
+      dispatch: Dispatch;
+      getState?: () => Store;
+    },
+  ) => SuccessPayload | Promise<SuccessPayload>;
+}
 
-type ThunkConfigDefaulted<RequestParams, SuccessPayload> =
-  ThunkConfigReq<RequestParams, SuccessPayload> & ThunkConfigOpt<RequestParams, SuccessPayload>;
+type ThunkConfigParams<RequestParams, SuccessPayload> = ThunkConfigReq<
+  RequestParams,
+  SuccessPayload
+> &
+  Partial<ThunkConfigOpt<RequestParams, SuccessPayload>>;
+
+type ThunkConfigDefaulted<RequestParams, SuccessPayload> = ThunkConfigReq<
+  RequestParams,
+  SuccessPayload
+> &
+  ThunkConfigOpt<RequestParams, SuccessPayload>;
 
 export default function makeThunkFetch<RequestParams, SuccessPayload>(
   passedThunkConfig: ThunkConfigParams<RequestParams, SuccessPayload>,
@@ -29,36 +42,40 @@ export default function makeThunkFetch<RequestParams, SuccessPayload>(
     ...passedThunkConfig,
   };
 
-  return (params: RequestParams) => (dispatch: Dispatch, getState?: () => Store) => {
-    dispatch(thunkConfig.asyncActionSet.fetch(params));
+  return (params: RequestParams) => (
+    dispatch: Dispatch,
+    getState?: () => Store,
+  ) => {
+    // dispatch(thunkConfig.asyncActionSet.fetch(params));
     fetch(thunkConfig.fetchConfig)
       .then((response: Response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          const err = new Error("Did not receive valid json response");
-          // @ts-ignore
-          err.statusCode = response.status; // /!\
-          throw err;
         }
+        const err = new Error('Did not receive valid json response');
+        // @ts-ignore
+        err.statusCode = response.status; // /!\
+        throw err;
       })
-      .then(
-        (resp: any) => thunkConfig.transformResponse(resp, {
+      .then((resp: any) =>
+        thunkConfig.transformResponse(resp, {
           action: params,
           dispatch,
           ...(getState ? { getState } : {}),
-        }
-      ))
+        }),
+      )
       .then((response: SuccessPayload) => {
-        dispatch(thunkConfig.asyncActionSet.success(response));
+        // dispatch(thunkConfig.asyncActionSet.success(response));
       })
       .catch((err: any) => {
-        const errors = (err.errors !== undefined && Array.isArray(err.errors)) ? err.errors
-          : (err.errors !== undefined) ? [err.errors]
-          : [err];
-
+        // const errors =
+        //   err.errors !== undefined && Array.isArray(err.errors)
+        //     ? err.errors
+        //     : err.errors !== undefined
+        //     ? [err.errors]
+        //     : [err];
         // Warning: Makes best guess at any[]
-        dispatch(thunkConfig.asyncActionSet.fail(errors));
+        // dispatch(thunkConfig.asyncActionSet.fail(errors));
       });
-  }
+  };
 }

@@ -6,9 +6,7 @@ const renderer = { create: (...args: any[]): any => {} };
 
 describe('components/Loading', () => {
   it('renders the component', () => {
-    const tree: JSON = renderer
-      .create(<Loading />)
-      .toJSON();
+    const tree: JSON = renderer.create(<Loading />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

@@ -1,5 +1,5 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 export type ContainerProps<PublicProps, ContainerProps = {}> = PublicProps & {
-  View: FC<PublicProps & ContainerProps>,
-}
+  View: FC<PublicProps & ContainerProps>;
+};
