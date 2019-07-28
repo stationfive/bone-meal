@@ -1,4 +1,4 @@
-import { Omit } from 'utils/TypeUtils/Omit';
+import { Omit } from 'utils/Type/Omit';
 
 export interface User {
   id: string;

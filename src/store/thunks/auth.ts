@@ -1,5 +1,4 @@
 import { authActions } from 'store/actions';
-import makeThunkFetch from 'services/fetch/makeThunkFetch';
 import { Dispatch } from 'redux';
 import { Store } from '../../types/Store/Store';
 

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { Optional } from 'utils/TypeUtils/Optional';
-import { fallback } from 'utils/DataUtils';
+import { Optional } from 'utils/Type/Optional';
+import { fallback } from 'utils/Data';
 import { Store } from 'types/Store/Store';
 
 function useSelectorSafe<Value>(

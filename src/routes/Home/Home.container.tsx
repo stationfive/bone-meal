@@ -4,7 +4,7 @@ import useSelectorSafe from 'store/selectors/useSelectorSafe';
 import { authThunks } from 'store/thunks';
 import { UserState } from 'types/Store/UserState';
 import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
-import { asyncData } from 'utils/ReduxUtils';
+import { asyncData } from 'utils/Redux';
 import { routerActions } from 'store/actions';
 import ROUTES from 'routes';
 import HomeView from './Home.view';

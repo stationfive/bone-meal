@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
-import { fallback } from 'utils/DataUtils';
-import { Optional } from 'utils/TypeUtils/Optional';
+import { fallback } from 'utils/Data';
+import { Optional } from 'utils/Type/Optional';
 import { HomeProps } from './Home.props';
 
 const HomeView: FC<HomeProps> = (props: HomeProps): ReactElement<'div'> => {

@@ -1,7 +1,7 @@
 import { AsyncData } from 'types/Store/AsyncData';
 import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
-import { ValErr } from 'types/ValErr';
-import { Optional } from 'utils/TypeUtils/Optional';
+import { AppErr } from 'types/AppErr';
+import { Optional } from 'utils/Type/Optional';
 
 export function asyncData<T>(
   status: ASYNC_STATUS.INITIAL,
@@ -20,12 +20,12 @@ export function asyncData<T>(
 ): AsyncData<T>;
 export function asyncData<T>(
   status: ASYNC_STATUS.ERROR,
-  errors: ValErr[],
+  errors: AppErr[],
   data?: Optional<T>,
 ): AsyncData<T>;
 export function asyncData<T>(
   status: ASYNC_STATUS,
-  errorsOrData: ValErr[] | T,
+  errorsOrData: AppErr[] | T,
   data?: Optional<T>,
 ): AsyncData<T> {
   if (status & ASYNC_STATUS.LOADING) {
@@ -43,7 +43,7 @@ export function asyncData<T>(
     };
   }
   return {
-    errors: errorsOrData as ValErr[],
+    errors: errorsOrData as AppErr[],
     status: ASYNC_STATUS.ERROR,
     data,
   };

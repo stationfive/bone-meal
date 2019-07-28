@@ -1,11 +1,8 @@
 import { Action } from 'types/Action';
 
 export default {
-  makeIdentity: <T>() => (state: T, action: Action<T>): T => action.payload,
-  makeUpdate: <T extends {}>() => (
-    state: T,
-    action: Action<Partial<T>>,
-  ): T => ({
+  makeSet: <T>() => (state: T, action: Action<T>): T => action.payload,
+  makeMerge: <T extends {}>() => (state: T, action: Action<Partial<T>>): T => ({
     ...state,
     ...action.payload,
   }),

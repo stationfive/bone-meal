@@ -1,4 +1,4 @@
-import { Optional } from 'utils/TypeUtils/Optional';
+import { Optional } from 'utils/Type/Optional';
 
 const execFallback = <Obj, Value>(
   fn: (optimisticObj: Required<Obj>) => Optional<Value>,

@@ -21,7 +21,7 @@ import queryString from 'query-string';
 import routes from 'routes';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { mapObj, fallback } from '../utils/DataUtils';
+import { mapObj, fallback } from '../utils/Data';
 
 const isProd: boolean =
   fallback<NodeJS.Process, string>(p => p.env.NODE_ENV, '', process) ===
