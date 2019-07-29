@@ -7,12 +7,10 @@ import { authActions } from '../actions';
 
 const DEFAULT_STATE: UserState = asyncData(ASYNC_STATUS.INITIAL);
 
-const ns = 'USER';
-
 const reducer = handleActions<UserState, any>(
   {
     [String(authActions.logout)]: presetReducers.makeReset(DEFAULT_STATE),
-    ...createAsyncReducers<User>(`${ns}/LOGIN`),
+    ...createAsyncReducers<User>('AUTH/LOGIN'),
   },
   DEFAULT_STATE,
 );

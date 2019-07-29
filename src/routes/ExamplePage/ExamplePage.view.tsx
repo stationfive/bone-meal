@@ -6,11 +6,8 @@ const ExamplePageView: FC<ExamplePageProps> = (
   props: ExamplePageProps,
 ): ReactElement<'div'> => (
   <div>
-    <h1>
-      User is
-      {props.uid}
-    </h1>
+    <h1>{props.email}</h1>
   </div>
 );
 
-export default ExamplePageView;
+export default React.memo(ExamplePageView);

@@ -12,23 +12,26 @@ const HomeView: FC<HomeProps> = (props: HomeProps): ReactElement<'div'> => {
   );
   const userGreeting = fallback<HomeProps, string>(
     _ => _.user.email,
-    'friend',
+    'stranger',
     props,
   );
 
   return (
     <div>
-      <h1>
-        Welcome home
-        {props.loading ? '...' : userGreeting}
-      </h1>
-      {uid ? (
-        <button onClick={() => props.toProfile(userGreeting)}>Home</button>
+      <h1>Welcome home, {userGreeting}</h1>
+      {props.loading ? (
+        <span>Logging you in</span>
       ) : (
-        <button onClick={props.login}>Log in</button>
+        <div>
+          {uid ? (
+            <button onClick={() => props.toProfile(uid)}>Home</button>
+          ) : (
+            <button onClick={props.login}>Log in</button>
+          )}
+        </div>
       )}
     </div>
   );
 };
 
-export default HomeView;
+export default React.memo(HomeView);

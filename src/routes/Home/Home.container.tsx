@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import useSelectorSafe from 'store/selectors/useSelectorSafe';
-import { authThunks } from 'store/thunks';
+import { authThunks } from 'thunks';
 import { UserState } from 'types/Store/UserState';
 import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
 import { asyncData } from 'utils/Redux';
@@ -30,10 +30,10 @@ const HomeContainer: FC<HomePublicProps> = (props: HomePublicProps) => {
         errors,
         toProfile: (slug: string) =>
           dispatch(routerActions.link(ROUTES.EXAMPLE, { slug })),
-        login: () => dispatch(authThunks.login('your@email.com')),
+        login: () => dispatch(authThunks.login({ email: 'your@email.com' })),
       }}
     />
   );
 };
 
-export default HomeContainer;
+export default React.memo(HomeContainer);

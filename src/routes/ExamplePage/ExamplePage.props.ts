@@ -7,7 +7,7 @@ export interface ExamplePagePublicProps {
 interface ExamplePageCalcedProps {
   toggle: boolean;
   setToggle: (newUser: boolean) => void;
-  uid: string;
+  email: string;
 }
 
 export type ExamplePageProps = ExamplePagePublicProps & ExamplePageCalcedProps;

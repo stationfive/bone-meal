@@ -53,7 +53,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix './src/**/*.{ts,tsx}' && echo 'lint completed successfully'",
+    "check": "eslint --fix './src/**/*.{ts,tsx}' && echo 'lint completed successfully'",
     "format": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'"
   },
   "eslintConfig": {
@@ -61,7 +61,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint"
+      "pre-commit": "npm run format && npm run check"
     }
   },
   "browserslist": {

@@ -1,8 +1,7 @@
+import { RouteDef } from '../../types/RouteDef';
+
 export interface RouterPublicProps {
   components: {
-    [k: string]: {
-      component: any;
-      path: string;
-    };
+    [k: string]: RouteDef;
   };
 }

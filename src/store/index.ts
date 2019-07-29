@@ -18,10 +18,10 @@ import {
 import storage from 'redux-persist/lib/storage';
 import promise from 'redux-promise-middleware';
 import queryString from 'query-string';
-import routes from 'routes';
+import ROUTES from 'routes';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { mapObj, fallback } from '../utils/Data';
+import { fallback } from '../utils/Data';
 
 const isProd: boolean =
   fallback<NodeJS.Process, string>(p => p.env.NODE_ENV, '', process) ===
@@ -39,10 +39,10 @@ const persistConfig: PersistConfig = {
 };
 
 // Transform ROUTES to have `ROUTER/` prefix and map to path
-const routePaths = Object.keys(routes).reduce(
+const routePaths = Object.keys(ROUTES).reduce(
   (processedRoutes, routeKey) => ({
     ...processedRoutes,
-    [`ROUTER/${routeKey}`]: routes[routeKey].path,
+    [`ROUTER/${routeKey}`]: ROUTES[routeKey].path,
   }),
   {},
 );

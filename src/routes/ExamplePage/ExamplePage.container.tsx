@@ -1,22 +1,19 @@
 import React, { useState, FC } from 'react';
 import useSelectorSafe from 'store/selectors/useSelectorSafe';
-import useAuthGuard from 'utils/Hooks/useAuthGuard';
 import { ExamplePagePublicProps } from './ExamplePage.props';
 import ExamplePageView from './ExamplePage.view';
 
 const ExamplePageContainer: FC<ExamplePagePublicProps> = (
   props: ExamplePagePublicProps,
 ) => {
-  useAuthGuard();
-
   const [toggle, setToggle] = useState(true);
-  const uid = useSelectorSafe<string>(
+  const email = useSelectorSafe<string>(
     // @ts-ignore
-    state => state.user.data.id,
+    state => state.user.data.email,
     '',
   );
 
-  return <ExamplePageView {...props} {...{ uid, toggle, setToggle }} />;
+  return <ExamplePageView {...props} {...{ email, toggle, setToggle }} />;
 };
 
-export default ExamplePageContainer;
+export default React.memo(ExamplePageContainer);
