@@ -1,7 +1,7 @@
 import { Action } from 'types/Action';
 
 export default {
-  makeSet: <T>() => (state: T, action: Action<T>): T => action.payload,
+  makeSetter: <T>() => (state: T, action: Action<T>): T => action.payload,
   makeMerge: <T extends {}>() => (state: T, action: Action<Partial<T>>): T => ({
     ...state,
     ...action.payload,

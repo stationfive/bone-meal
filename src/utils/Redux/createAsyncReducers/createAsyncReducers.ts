@@ -1,5 +1,5 @@
-import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
-import { AsyncData } from 'types/Store/AsyncData';
+import { ASYNC_STATUS } from 'types/store/AsyncStatus';
+import { AsyncData } from 'types/store/AsyncData';
 import { AppErr } from 'types/AppErr';
 import { Action } from 'redux-actions';
 import { asyncData } from '../asyncData/asyncData';

@@ -1,4 +1,4 @@
-import { Optional } from 'utils/Type/Optional';
+import { Optional } from 'types/util/Optional';
 import { ASYNC_STATUS } from './AsyncStatus';
 
 export type AsyncData<T> =

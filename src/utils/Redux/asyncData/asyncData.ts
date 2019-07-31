@@ -1,7 +1,7 @@
-import { AsyncData } from 'types/Store/AsyncData';
-import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
+import { AsyncData } from 'types/store/AsyncData';
+import { ASYNC_STATUS } from 'types/store/AsyncStatus';
 import { AppErr } from 'types/AppErr';
-import { Optional } from 'utils/Type/Optional';
+import { Optional } from 'types/util/Optional';
 
 export function asyncData<T>(
   status: ASYNC_STATUS.INITIAL,
@@ -28,6 +28,7 @@ export function asyncData<T>(
   errorsOrData: AppErr[] | T,
   data?: Optional<T>,
 ): AsyncData<T> {
+  // eslint-disable-next-line no-bitwise
   if (status & ASYNC_STATUS.LOADING) {
     return {
       errors: [],
@@ -35,6 +36,7 @@ export function asyncData<T>(
       data: errorsOrData as T,
     };
   }
+  // eslint-disable-next-line no-bitwise
   if (status & (ASYNC_STATUS.COMPLETE | ASYNC_STATUS.INITIAL)) {
     return {
       errors: [],

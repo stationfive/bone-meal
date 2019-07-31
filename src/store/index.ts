@@ -35,7 +35,7 @@ const routerConfig: Record<string, any> = {
 const persistConfig: PersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'user'],
 };
 
 // Transform ROUTES to have `ROUTER/` prefix and map to path

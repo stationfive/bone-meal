@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AuthGuardOptions, AuthGuardPublicProps } from './AuthGuard.props';
 import useSelectorSafe from '../../store/selectors/useSelectorSafe';
-import { UserState } from '../../types/Store/UserState';
+import { UserState } from '../../types/store/UserState';
 import { asyncData } from '../../utils/Redux';
-import { ASYNC_STATUS } from '../../types/Store/AsyncStatus';
+import { ASYNC_STATUS } from '../../types/store/AsyncStatus';
 import { fallback } from '../../utils/Data';
-import { Optional } from '../../utils/Type/Optional';
+import { Optional } from '../../types/util/Optional';
 import { routerActions } from '../../store/actions';
 
 const checkRedirect = (
@@ -26,7 +26,7 @@ const checkRedirect = (
   if (!options.allowAnon && !uid) {
     dispatch(routerActions.link(options.redirectAnon));
   } else if (!options.allowAuthed && uid) {
-    dispatch(routerActions.link(options.redirectAuthed, { slug: uid }));
+    dispatch(routerActions.link(options.redirectAuthed));
   }
 };
 

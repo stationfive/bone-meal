@@ -1,5 +1,5 @@
 import { makeCreateActions, presetActions } from 'utils/Redux';
-import { TokenState } from 'types/Store/TokenState';
+import { TokenState } from 'types/store/TokenState';
 
 const ns = 'TOKEN';
 const createTokenActions = makeCreateActions(ns);

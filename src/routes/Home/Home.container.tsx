@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import useSelectorSafe from 'store/selectors/useSelectorSafe';
-import { authThunks } from 'thunks';
-import { UserState } from 'types/Store/UserState';
-import { ASYNC_STATUS } from 'types/Store/AsyncStatus';
+import authThunks from 'thunks/auth';
+import { UserState } from 'types/store/UserState';
+import { ASYNC_STATUS } from 'types/store/AsyncStatus';
 import { asyncData } from 'utils/Redux';
 import { routerActions } from 'store/actions';
 import ROUTES from 'routes';
