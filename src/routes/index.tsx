@@ -1,13 +1,34 @@
-import React, { ReactComponentElement } from 'react';
-import { ROUTES } from 'consts';
-import LazyComponent from 'components/LazyComponent/LazyRouter';
-import { mapObj } from 'utils/DataUtils';
+import { NOT_FOUND as RFR_NOT_FOUND } from 'redux-first-router';
+import { RouteDef } from 'types/RouteDef';
+import { copyObjKeys } from 'utils/Data';
+import { makeAuthGuard } from '../components/AuthGuard';
 
-const componentsFolders = {
-  [ROUTES.ROOT]: 'Home',
-  [ROUTES.NOT_FOUND]: 'NotFound',
-};
+interface RouteDefMap {
+  [k: string]: RouteDef;
+}
 
-export default mapObj((val: string): () => ReactComponentElement<any> =>
-  () => LazyComponent(`${val}`)
-)(componentsFolders);
+const ROUTES: RouteDefMap = copyObjKeys<RouteDefMap>(
+  {
+    ROOT: {
+      component: 'Home',
+      path: '/',
+    },
+    EXAMPLE: {
+      component: 'ExamplePage',
+      path: '/eg',
+      middleware: () =>
+        makeAuthGuard({
+          allowAuthed: true,
+          redirectAnon: ROUTES.ROOT,
+        }),
+    },
+    NOT_FOUND: {
+      component: 'NotFound',
+      name: RFR_NOT_FOUND,
+      path: '/404',
+    },
+  },
+  'name',
+);
+
+export default ROUTES;

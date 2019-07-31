@@ -1,9 +1,7 @@
-export type RouterPassedProps = {
-  components: {},
-};
+import { RouteDef } from '../../types/RouteDef';
 
-export type RouterGeneratedProps = {
-  location: any,
+export interface RouterPublicProps {
+  components: {
+    [k: string]: RouteDef;
+  };
 }
-
-export type RouterProps = RouterPassedProps & RouterGeneratedProps;

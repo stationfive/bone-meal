@@ -1,16 +1,13 @@
-import {FunctionComponent, ReactElement} from "react";
-import React from "react";
-import { ExamplePageProps } from "./ExamplePage.props";
+import React, { FC, ReactElement } from 'react';
 
-const ExamplePageView: FunctionComponent<ExamplePageProps> = (props: ExamplePageProps): ReactElement<'div'> => {
-  return (
-    <div>
-      <h1>
-        We made it
-        User is { props.user }
-      </h1>
-    </div>
-  );
-};
+import { ExamplePageProps } from './ExamplePage.props';
 
-export default ExamplePageView;
+const ExamplePageView: FC<ExamplePageProps> = (
+  props: ExamplePageProps,
+): ReactElement<'div'> => (
+  <div>
+    <h1>{props.email}</h1>
+  </div>
+);
+
+export default React.memo(ExamplePageView);

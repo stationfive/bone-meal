@@ -1,12 +1,16 @@
-import { User } from "types/User";
+import { RouteDef } from 'types/RouteDef';
+import { User } from 'types/User';
 
-export type HomeGeneratedProps = {
-  user: boolean,
-  setUser: (newUser: boolean) => void,
+export interface HomePublicProps {
+  route: RouteDef;
 }
 
-export type HomePassedProps = {
-  // no props can be passed to pages
+interface HomeCalcedProps {
+  user?: User;
+  toProfile: (slug: string) => void;
+  login: () => void;
+  loading: boolean;
+  errors: {}[];
 }
 
-export type HomeProps = HomePassedProps & HomeGeneratedProps;
+export type HomeProps = HomePublicProps & HomeCalcedProps;

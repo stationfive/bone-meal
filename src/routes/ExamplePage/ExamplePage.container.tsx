@@ -1,17 +1,27 @@
-import React, {
-  useState,
-  FunctionComponent,
-  ReactElement,
-} from "react";
-import { ContainerProps} from "utils/TypeUtils/ContainerProps";
-import { ExamplePageProps, ExamplePageGeneratedProps, ExamplePagePassedProps} from "./ExamplePage.props";
+import React, { useState, FC, useEffect } from 'react';
+import useSelectorSafe from 'store/selectors/useSelectorSafe';
+import { useDispatch } from 'react-redux';
+import exampleThunks from 'thunks/example';
+import { ExamplePagePublicProps } from './ExamplePage.props';
+import ExamplePageView from './ExamplePage.view';
 
-type Props = ContainerProps<ExamplePagePassedProps, ExamplePageGeneratedProps>;
+const ExamplePageContainer: FC<ExamplePagePublicProps> = (
+  props: ExamplePagePublicProps,
+) => {
+  const [toggle, setToggle] = useState(true);
+  const dispatch = useDispatch();
 
-const ExamplePageContainer: FunctionComponent<Props> = ({ View, ...props }: Props) => {
-    const [user, setUser] = useState(true);
+  useEffect(() => {
+    dispatch(exampleThunks.getListings());
+  }, []);
 
-    return View({ ...props, user, setUser });
-  };
+  const email = useSelectorSafe<string>(
+    // @ts-ignore
+    state => state.user.data.email,
+    '',
+  );
 
-export default ExamplePageContainer;
+  return <ExamplePageView {...props} {...{ email, toggle, setToggle }} />;
+};
+
+export default React.memo(ExamplePageContainer);

@@ -1,12 +1,13 @@
-import { User } from "types/User";
+import { RouteDef } from 'types/RouteDef';
 
-export type ExamplePageGeneratedProps = {
-  user: boolean,
-  setUser: (newUser: boolean) => void,
+export interface ExamplePagePublicProps {
+  route: RouteDef;
 }
 
-export type ExamplePagePassedProps = {
-  // no props can be passed to pages
+interface ExamplePageCalcedProps {
+  toggle: boolean;
+  setToggle: (newUser: boolean) => void;
+  email: string;
 }
 
-export type ExamplePageProps = ExamplePagePassedProps & ExamplePageGeneratedProps;
+export type ExamplePageProps = ExamplePagePublicProps & ExamplePageCalcedProps;
