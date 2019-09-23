@@ -1,6 +1,7 @@
 import { camelToSnake } from 'utils/String';
 
 const makeCreateActions = (ns: string) => <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   O extends { [P in keyof O]: ((...args: any[]) => any) | (() => void) },
   P extends string
 >(
@@ -17,6 +18,7 @@ const makeCreateActions = (ns: string) => <
       return { ...acc, [k]: actionMap[k] };
     }
     const actionSnake = camelToSnake(k);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const creatorFn = (...args: any[]) => ({
       type: `${ns}/${actionSnake}`,
       // @ts-ignore

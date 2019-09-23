@@ -4,6 +4,7 @@ import { ASYNC_STATUS } from 'types/store/AsyncStatus';
 import { Optional } from 'types/util/Optional';
 import { asyncData } from '../Redux';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function useAsyncState<PromParams extends any[], Response>(
   asyncFn: (...params: PromParams) => Promise<Response>,
   initData?: Optional<Response>,

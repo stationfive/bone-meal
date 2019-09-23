@@ -1,4 +1,4 @@
-const DEFAULT_HEADERS: Record<string, any> = {
+const DEFAULT_HEADERS: Record<string, string> = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
 };

@@ -150,9 +150,9 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     existingRouteFile.replace(
       `NOT_FOUND: {`,
       makey.templateReplace(`{{ROUTE_NAME}}: {
-    component: '{{RouteName}}',
-    path: '/{{path}}',
-  },
+      component: '{{RouteName}}',
+      path: '/{{path}}',
+    },
   NOT_FOUND: {`,
         {
           ROUTE_NAME,

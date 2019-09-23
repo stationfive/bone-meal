@@ -4,5 +4,8 @@ export interface RouteDef {
   component: string;
   path: string;
   middleware?: () => FC<{ children: ReactNode }>;
-  name?: string;
+  meta?: {
+    step?: number;
+  };
+  id?: string;
 }

@@ -2,14 +2,14 @@ import React, { FC, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import useSelectorSafe from 'store/selectors/useSelectorSafe';
+import { UserState } from 'types/store/UserState';
+import { asyncData } from 'utils/Redux';
+import { ASYNC_STATUS } from 'types/store/AsyncStatus';
+import { fallback } from 'utils/Data';
+import { Optional } from 'types/util/Optional';
+import { routerActions } from 'store/actions';
 import { AuthGuardOptions, AuthGuardPublicProps } from './AuthGuard.props';
-import useSelectorSafe from '../../store/selectors/useSelectorSafe';
-import { UserState } from '../../types/store/UserState';
-import { asyncData } from '../../utils/Redux';
-import { ASYNC_STATUS } from '../../types/store/AsyncStatus';
-import { fallback } from '../../utils/Data';
-import { Optional } from '../../types/util/Optional';
-import { routerActions } from '../../store/actions';
 
 const checkRedirect = (
   dispatch: Dispatch,
@@ -42,7 +42,7 @@ const AuthGuardContainer: FC<AuthGuardPublicProps> = (
 
   useEffect(() => {
     checkRedirect(dispatch, userState, ownProps);
-  }, [userState, ownProps]);
+  }, [dispatch, userState, ownProps]);
 
   return <div>{ownProps.children}</div>;
 };

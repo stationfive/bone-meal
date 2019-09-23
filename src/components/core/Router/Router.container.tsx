@@ -3,7 +3,7 @@ import { NOT_FOUND } from 'redux-first-router';
 import useSelectorSafe from 'store/selectors/useSelectorSafe';
 import { RouterPublicProps } from './Router.props';
 import LazyComponent from '../LazyComponent/LazyComponent';
-import { RouteDef } from '../../types/RouteDef';
+import { RouteDef } from '../../../types/RouteDef';
 
 const Middleware = ({
   route,

@@ -5,6 +5,7 @@ import { authActions, tokenActions } from '../actions';
 
 const DEFAULT_STATE: TokenState = null;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<TokenState, any>(
   {
     [String(tokenActions.updated)]: presetReducers.makeSetter<TokenState>(),

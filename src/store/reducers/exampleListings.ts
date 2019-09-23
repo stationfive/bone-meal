@@ -7,6 +7,7 @@ import { ExampleListing } from '../../types/ExampleListing';
 
 const DEFAULT_STATE: ExampleListingState = asyncData(ASYNC_STATUS.INITIAL);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<ExampleListingState, any>(
   {
     ...createAsyncReducers<ExampleListing[]>('EXAMPLE/GET_LISTINGS'),

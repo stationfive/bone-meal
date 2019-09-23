@@ -27,7 +27,7 @@ const isProd: boolean =
   fallback<NodeJS.Process, string>(p => p.env.NODE_ENV, '', process) ===
   'production';
 
-const routerConfig: Record<string, any> = {
+const routerConfig = {
   initialDispatch: false,
   querySerializer: queryString,
 };

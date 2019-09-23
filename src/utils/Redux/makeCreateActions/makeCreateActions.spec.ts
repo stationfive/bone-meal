@@ -32,7 +32,7 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
   describe('void actionCreator', () => {
     const testAction = createTestAction({
       idTest: presetActions.makeIdentity(),
-      voidTest: presetActions.void,
+      voidTest: presetActions.noPayload,
     });
 
     test('returns action id and actionCreator', () => {

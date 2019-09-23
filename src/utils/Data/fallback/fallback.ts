@@ -27,8 +27,8 @@ function fallback<Obj, Value>(
   defaultVal: Value,
   obj1?: Obj,
 ) {
-  if (obj1 !== undefined) {
-    return execFallback<Obj, Value>(fn, defaultVal, obj1);
+  if (arguments.length === 3) {
+    return execFallback<Obj, Value>(fn, defaultVal, obj1 as Obj);
   }
   return (obj2: Obj): Value => execFallback(fn, defaultVal, obj2);
 }

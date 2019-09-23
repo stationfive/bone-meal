@@ -31,10 +31,10 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
   });
 
   describe('void actionCreator', () => {
-    const testAction = createTestAction('ID_TEST', presetActions.void);
+    const testAction = createTestAction('ID_TEST', presetActions.noPayload);
 
     test('returns action id and actionCreator', () => {
-      expect(testAction.toString()).toEqual('NAMESPACE/VOID_TEST');
+      expect(testAction.toString()).toEqual('NAMESPACE/ID_TEST');
       expect(typeof testAction).toEqual('function');
     });
 
@@ -42,7 +42,7 @@ describe('utils/ReduxUtils/makeCreateAction', () => {
       const action = testAction();
 
       expect(action).toEqual({
-        type: 'NAMESPACE/VOID_TEST',
+        type: 'NAMESPACE/ID_TEST',
         payload: undefined,
       });
     });

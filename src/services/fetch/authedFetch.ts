@@ -4,6 +4,10 @@ import AppErr from 'utils/App/AppErr/AppErr';
 import { tokenActions } from '../../store/actions';
 import jsonFetch from './jsonFetch';
 
+interface RespWToken {
+  token?: string;
+}
+
 const authedFetch = <SuccessPayload>(input: string, init: RequestInit = {}) => (
   dispatch: Dispatch,
   getState: () => Store,
@@ -20,11 +24,11 @@ const authedFetch = <SuccessPayload>(input: string, init: RequestInit = {}) => (
     },
   };
 
-  return jsonFetch(input, filledInit).then(async (response: any) => {
-    if (response.token) {
-      dispatch(tokenActions.updated(response.token));
+  return jsonFetch(input, filledInit).then(async (response: unknown) => {
+    if ((response as RespWToken).token !== undefined) {
+      dispatch(tokenActions.updated((response as RespWToken).token as string));
     }
-    return response;
+    return response as SuccessPayload;
   });
 };
 

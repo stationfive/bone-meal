@@ -1,4 +1,4 @@
-import { RouteDef } from '../../types/RouteDef';
+import { RouteDef } from '../../../types/RouteDef';
 
 export interface RouterPublicProps {
   components: {

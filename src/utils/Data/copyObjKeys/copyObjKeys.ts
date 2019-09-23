@@ -1,7 +1,10 @@
 import mapObj from '../mapObj/mapObj';
 
-export default <O>(objMap: O, key: string = 'key') =>
-  mapObj((obj: Record<string, any>, k) => ({
+export default <T, U extends Record<string, T>>(
+  objMap: U,
+  key: string = 'key',
+) =>
+  mapObj((obj: T, k) => ({
     [key]: k,
     ...obj,
-  }))(objMap) as O;
+  }))(objMap) as Record<string, T>;

@@ -1,3 +1,5 @@
+const makeyStory = require('./story');
+
 const viewBody = `import { FC, ReactElement } from 'react';
 import React from 'react';
 import { {{CompName}}Props } from './{{CompName}}.props';
@@ -76,8 +78,17 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     return;
   }
 
+  const compTypeRaw = makey.toLowerCaseFirst(
+    cliArgs[0] || (await makey.ask('type of component (M)odules, (l)ayout, (p)rimatives:')) || 'm',
+  );
+  const compType = {
+    m: 'modules',
+    p: 'primatives',
+    l: 'layouts',
+  }[compTypeRaw[0].toLowerCase()];
+
   const compName = makey.toLowerCaseFirst(
-    cliArgs[0] || (await makey.ask('Name of your component:'))
+    cliArgs[1] || (await makey.ask('Name of your component:'))
   );
   if (!compName) throw Error("Please provide a component name");
 
@@ -87,10 +98,14 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     ? true
     : cliFlags['container'] || (await makey.askYN('Create a (smart) container for the Comp?'));
 
+  const makeStory = cliFlags['y']
+    ? true
+    : cliFlags['story'] || (await makey.askYN('Create a Storybook stories file for the Comp?'));
+
   const viewFilled = makey.templateReplace(viewBody, { CompName });
 
   makey.createFile(
-    `./src/components/${CompName}/${CompName}.view.tsx`,
+    `./src/components/${compType}/${CompName}/${CompName}.view.tsx`,
     viewFilled,
   );
 
@@ -105,12 +120,12 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   });
 
   makey.createFile(
-    `./src/components/${CompName}/${CompName}.props.tsx`,
+    `./src/components/${compType}/${CompName}/${CompName}.props.tsx`,
     propsFilled,
   );
 
   makey.createFile(
-    `./src/components/${CompName}/index.tsx`,
+    `./src/components/${compType}/${CompName}/index.tsx`,
     makey.templateReplace(
       CompIndex,
       {
@@ -122,7 +137,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
 
   if (makeContainer) {
     makey.createFile(
-      `./src/components/${CompName}/${CompName}.container.tsx`,
+      `./src/components/${compType}/${CompName}/${CompName}.container.tsx`,
       makey.templateReplace(
         containerBody,
         {
@@ -132,23 +147,16 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     );
   }
 
-  // todo: import the Comp:
-  // makey.editFile(`src/components/index.tsx`, (existingCompFile) =>
-  //   existingCompFile.replace(
-  //     `NOT_FOUND: {`,
-  //     makey.templateReplace(`{{COMP_NAME}}: {
-  //   component: '{{CompName}}',
-  //   path: '/{{path}}',
-  // },
-  // NOT_FOUND: {`,
-  //       {
-  //         COMP_NAME,
-  //         CompName,
-  //         path,
-  //       },
-  //     )
-  //   ),
-  // );
+  makey.editFile(`src/components/${compType}/index.ts`,
+    (indexContents) => {
+      const newExport = `export { default as ${CompName} } from './${CompName}';`;
+      return indexContents.replace(
+        /([\r\n])$/,
+        `$1${newExport}\n`,
+      );
+    });
+
+  if (makeStory) makeyStory({ cliArgs, cliFlags, makey })
 };
 
 const help = `Adds a new React component.
@@ -156,7 +164,7 @@ const help = `Adds a new React component.
 This will create the new component folder (/src/components/MyCompName), the components files,
 and add to the index in /src/components/index.tsx
 
-\`npm run domakey component MyCompName\`
+\`npm run domakey component componentType MyCompName\`
 
 Options:
  --container    Create container by default

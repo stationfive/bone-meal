@@ -13,7 +13,7 @@ const ExamplePageContainer: FC<ExamplePagePublicProps> = (
 
   useEffect(() => {
     dispatch(exampleThunks.getListings());
-  }, []);
+  }, [dispatch]);
 
   const email = useSelectorSafe<string>(
     // @ts-ignore

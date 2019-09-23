@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "4.3.3",
+    "@material-ui/icons": "4.2.1",
+    "@material-ui/styles": "4.4.1",
     "query-string": "6.7.0",
+    "ramda": "0.26.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-loadable": "5.5.0",
     "react-redux": "7.1.0",
     "react-scripts": "3.0.1",
     "redux": "4.0.1",
     "redux-actions": "2.6.5",
+    "redux-devtools-extension": "2.13.7",
     "redux-first-router": "2.1.1",
     "redux-first-router-link": "2.1.1",
     "redux-listeners": "0.4.1",
@@ -18,16 +22,16 @@
     "redux-promise-middleware": "6.1.1",
     "redux-promise-middleware-actions": "2.1.0",
     "redux-thunk": "2.3.0",
-    "typescript": "3.5.1",
-    "redux-devtools-extension": "2.13.7"
+    "typescript": "3.5.1"
   },
   "devDependencies": {
+    "@storybook/react": "5.1.11",
     "@types/jest": "24.0.13",
     "@types/node": "12.0.8",
     "@types/query-string": "6.3.0",
+    "@types/ramda": "0.26.22",
     "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
-    "@types/react-loadable": "5.5.0",
     "@types/react-redux": "7.1.0",
     "@types/redux-actions": "2.6.0",
     "@types/redux-first-router": "2.1.1",
@@ -46,7 +50,8 @@
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.3",
     "husky": "3.0.1",
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "storybook-addon-material-ui": "0.9.0-alpha.20"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -54,15 +59,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "check": "eslint --fix './src/**/*.{ts,tsx}' && echo 'lint completed successfully'",
-    "format": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}'"
+    "check": "eslint './src/**/*.{js,jsx,ts,tsx}' && echo 'lint completed successfully'",
+    "format": "./node_modules/.bin/prettier --write 'src/**/*.{ts,tsx}' && eslint --fix './src/**/*.{js,jsx,ts,tsx}' ",
+    "storybook": "start-storybook -c .storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run check"
+      "pre-commit": "npm run format"
     }
   },
   "browserslist": {
